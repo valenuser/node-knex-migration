@@ -5,6 +5,7 @@ const morgan = require('morgan');
 
 
 const logDirectory = path.resolve(__dirname, '..', 'logs');
+
 if (!fs.existsSync(logDirectory)) {
     fs.mkdirSync(logDirectory);
 }
@@ -12,7 +13,12 @@ if (!fs.existsSync(logDirectory)) {
 
 const accessLogStream = fs.createWriteStream(
     path.join(logDirectory, 'access.log'),
-    { flags: 'a' }
+    {
+        interval: '1w',
+        path: logDirectory,
+        maxFiles: 8,  // Tenemos 2 meses de logs
+        compress: 'gzip',
+    }
 );
 
 
