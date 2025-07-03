@@ -22,6 +22,13 @@ Este proyecto usa [Knex.js](https://knexjs.org/) como *query builder* y sistema 
    npm install
 ```
 ---
+## IMPORTANTE
+- En caso de haber utilizado ya una versión de ejemplo y deseas probar otra base de datos, primero debes borrar las tablas ya creadas, si no dará error.
+- Comando SQL para borrar las tablas:
+```
+  DROP TABLE IF EXISTS tabla1, tabla2, tabla3;
+```
+---
 ## 📚 Documentación oficial
 
 👉 https://knexjs.org/guide/migrations.html
