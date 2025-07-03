@@ -1,11 +1,10 @@
 require('module-alias/register');
 const express = require('express');
-const morgan = require("morgan")
 const dotenv = require("dotenv").config()
 const cors = require("cors")
 const db = require('./db/knex')
-const fs = require('node:fs')
-const path = require('node:path')
+
+const loggerMiddleware = require('./config/loggerMorgan');
 
 const mainRouter = require('routes');
 
@@ -14,7 +13,7 @@ class App {
     constructor() {
         this.app = express()
         this.middlewares()
-        this.setupMorgan()
+        // this.setupMorgan()
         this.listen()
     }
 
@@ -22,9 +21,13 @@ class App {
         this.app.use(express.json())
         this.app.use(express.urlencoded({extended: true}))
         this.app.use(cors())
+
+        loggerMiddleware().forEach(mgn => this.app.use(mgn));
+
         this.app.use(mainRouter)
     }
 
+    /*
     setupMorgan() {
         const logDirectory = path.join(__dirname, "logs")
         if (!fs.existsSync(logDirectory)) {
@@ -40,7 +43,7 @@ class App {
         this.app.use(morgan("combined", { stream: accessLogWriteStream }));
         this.app.use(morgan('dev'))
     }
-
+*/
     listen() {
         this.app.listen(process.env.PORT, () => {
             console.log(`Server is running on port ${process.env.PORT}`)
