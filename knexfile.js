@@ -1,3 +1,8 @@
+const dotenv = require("dotenv").config()
+
+console.log(process.env.MYSQL_PASSWORD);
+
+
 module.exports = {
     development: {
       client: 'mysql2',

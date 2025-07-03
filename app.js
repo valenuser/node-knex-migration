@@ -1,7 +1,7 @@
 require('module-alias/register');
 const express = require('express');
 const morgan = require("morgan")
-const dotenv = require("dotenv")
+const dotenv = require("dotenv").config()
 const cors = require("cors")
 const mainRouter = require('routes'); 
 const db = require('./db/knex')
@@ -19,7 +19,6 @@ class App {
         this.app.use(express.urlencoded({extended:true}))
         this.app.use(morgan('dev'))
         this.app.use(cors())
-        dotenv.config({path:'.env'})
         this.app.use(mainRouter)
     }
 
