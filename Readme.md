@@ -40,6 +40,27 @@ Este archivo resume los comandos más importantes que puedes utilizar con [Knex.
 npx knex init
 ```
 Esto crea un archivo knexfile.js donde defines la configuración para tu base de datos.
+Ejemplo de knexfile:
+```
+    module.exports = {
+        development: {
+          client: 'mysql2',
+          connection: {
+            host: '',  
+            port:'',    
+            user: '',           
+            password:'',  
+            database:''
+          },
+          migrations: {
+            directory: './db/migrations',
+          },
+          seeds: {
+            directory: './db/seeds',
+          },
+        },
+      };
+```
 
 # 📦 Migraciones con Knex.js
 
