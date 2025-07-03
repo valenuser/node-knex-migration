@@ -26,6 +26,20 @@ class StudentService {
 
         return student
     }
+
+    async createStudent(data){
+
+        //se deberia usar express-validator o zod para la verificacion de datos pero son ejemplos de prueba
+        const student_created = await this.repository.createStudent(data)
+
+        if(!student_created){
+
+            throw new Error('No se ha podido almacenar los datos del estudiante')
+
+        }
+
+        return student_created
+    }
 }
 
 

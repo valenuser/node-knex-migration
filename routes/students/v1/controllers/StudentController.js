@@ -51,6 +51,25 @@ class StudentController{
 
     })
 
+
+    this.router.post('/save',async(req,res)=>{
+
+      try{
+        //se deberia usar express-validator o zod para la verificacion de datos pero son ejemplos de prueba
+        const data_student = req.body
+
+        const new_student = await this.services.createStudent(data_student)
+
+        res.status(200).json(new_student)
+
+      }catch(err){
+
+        res.status(404).json({message:err.message})
+
+      }
+
+    })
+
     return this.router;
   }
 }

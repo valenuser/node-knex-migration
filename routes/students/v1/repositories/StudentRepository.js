@@ -17,6 +17,24 @@ class StudentRepository{
         return await this.db('students').where({id}).first()
 
     }
+
+    async createStudent(data){
+        try{
+
+            const [id_student] =  await this.db('students').insert(data)
+            
+            const [new_student] = await this.db('students').where('id',id_student)
+
+            return new_student
+        }catch(err){
+
+            throw new Error('Error al guardar los datos del estudiante: '+err.message)
+
+        }
+
+
+
+    }
 }
 
 module.exports = {StudentRepository}
