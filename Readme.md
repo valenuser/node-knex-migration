@@ -14,7 +14,7 @@ Este proyecto usa [Knex.js](https://knexjs.org/) como *query builder* y sistema 
 ## Clonar repositorio
 
 ```
-    git clone https://github.com/valenuser/node-knex-migration/edit/master/Readme.md
+    git clone https://github.com/valenuser/node-knex-migration
 ```
 ## Instalar dependencias
 
