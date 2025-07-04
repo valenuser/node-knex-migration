@@ -3,10 +3,11 @@ const express = require('express');
 const dotenv = require("dotenv").config()
 const cors = require("cors")
 const db = require('./db/knex')
-
+const handlerError = require('./config/handler_error/handlerError')
 const loggerMiddleware = require('./config/loggerMorgan');
 
 const mainRouter = require('routes');
+const notFound = require('./config/handler_error/notFound');
 
 class App {
 
@@ -21,10 +22,20 @@ class App {
         this.app.use(express.json())
         this.app.use(express.urlencoded({extended: true}))
         this.app.use(cors())
-
         loggerMiddleware().forEach(mgn => this.app.use(mgn));
 
+        //todas las rutas
         this.app.use(mainRouter)
+
+        //manejo de rutas no existentes 
+        this.app.use(notFound)
+        
+        //manejo de errores
+        this.app.use(handlerError)
+
+        this.app.use((req,res,next)=>{
+
+        })
     }
 
     /*

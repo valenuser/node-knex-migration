@@ -1,3 +1,4 @@
+const AppError = require('../../../../config/handler_error/AppError')
 const db = require('../../../../db/knex')
 
 
@@ -28,11 +29,9 @@ class StudentRepository{
             return new_student
         }catch(err){
 
-            throw new Error('Error al guardar los datos del estudiante: '+err.message)
+            throw new AppError('Error al guardar los datos del estudiante',404)
 
         }
-
-
 
     }
 }
