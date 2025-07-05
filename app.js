@@ -3,6 +3,8 @@ const express = require('express');
 const dotenv = require("dotenv").config()
 const cors = require("cors")
 const db = require('./db/knex')
+
+const logger = require("./config/loggerWinston")
 const handlerError = require('./config/handler_error/handlerError')
 const loggerMiddleware = require('./config/loggerMorgan');
 
@@ -38,6 +40,7 @@ class App {
         })
     }
 
+    //Todo: Borrar si ya no hace falta
     /*
     setupMorgan() {
         const logDirectory = path.join(__dirname, "logs")
@@ -57,7 +60,8 @@ class App {
 */
     listen() {
         this.app.listen(process.env.PORT, () => {
-            console.log(`Server is running on port ${process.env.PORT}`)
+            logger.info(`Server is running on port ${process.env.PORT}`)
+            // console.log(`Server is running on port ${process.env.PORT}`)
         })
 
     }
