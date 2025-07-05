@@ -3,7 +3,6 @@ const dotenv = require("dotenv").config()
 // Todo: borrar este log cuando ya no se use
 console.log(process.env.MYSQL_PASSWORD);
 
-
 module.exports = {
     development: {
       client: 'mysql2',

@@ -1,3 +1,4 @@
+const AppError = require('../../../../config/handler_error/AppError')
 const {StudentRepository} = require('../repositories/StudentRepository')
 
 class StudentService {
@@ -20,7 +21,7 @@ class StudentService {
 
         if(!student){
 
-            throw new Error('Estudiante no encontrado')
+            throw new AppError('Estudiante no encontrado',404)
 
         }
 
@@ -34,7 +35,7 @@ class StudentService {
 
         if(!student_created){
 
-            throw new Error('No se ha podido almacenar los datos del estudiante')
+            throw new AppError('No se ha podido almacenar los datos del estudiante',404)
 
         }
 

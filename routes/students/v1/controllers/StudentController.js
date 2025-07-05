@@ -13,7 +13,7 @@ class StudentController{
 
   routes() {
 
-    this.router.get('/', async (req, res) => {
+    this.router.get('/', async (req, res,next) => {
 
       try{
 
@@ -21,14 +21,14 @@ class StudentController{
 
         res.status(200).json(users);
 
-      }catch(error){
+      }catch(err){
 
-        res.status(500).send({message:'Error interno del servidor'})
+        next(err)
 
       }
     });
 
-    this.router.get('/:id',async(req,res)=>{
+    this.router.get('/:id',async(req,res,next)=>{
 
       try{
         
@@ -46,13 +46,13 @@ class StudentController{
 
       }catch(err){
 
-        res.status(404).json({message:err.message})
+        next(err)
       }
 
     })
 
 
-    this.router.post('/save',async(req,res)=>{
+    this.router.post('/save',async(req,res,next)=>{
 
       try{
         //se deberia usar express-validator o zod para la verificacion de datos pero son ejemplos de prueba
@@ -60,11 +60,11 @@ class StudentController{
 
         const new_student = await this.services.createStudent(data_student)
 
-        res.status(200).json(new_student)
+        res.status(201).json(new_student)
 
       }catch(err){
 
-        res.status(404).json({message:err.message})
+        next(err)
 
       }
 
